@@ -1,6 +1,8 @@
 ## Js实现导出数据到xls文件
 `基本思路:` 获取html table的字符串,将其值转换为base64类型表示xls类型的数据,然后通过设置a标签的download属性的值为这个base64类型的数据将xls文件下载下来.
 
+`文件: exportToXls.js`
+
 #### exportToExcel 输入参数以及格式
 > filename: 下载文件的文件名
 > html: html table的字符串
@@ -44,6 +46,7 @@ exportToExcel('测试', tableHtml);
 ## Js实现导出数据到txt文件
 `基本思路:` 基本思路同上，需要拼一个base64的字符串,不同的地方就是需要把data设置成text/plain属性
 
+`文件: exportToText.js`
 
 #### 举例
 ```js
@@ -57,6 +60,8 @@ exportToText('测试', tableHtml);
 
 ## Js实现有层次的打印JSON
 `基本思路:` 利用递归思想,每一次递归就在字符串前多加一个制表符
+
+`文件: printJson.js`
 
 
 ### 举例
