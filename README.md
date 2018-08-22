@@ -40,3 +40,17 @@ var data = [{
 var tableHtml = genTableStr(header, data);
 exportToExcel('测试', tableHtml);
 ```
+
+## Js实现导出数据到txt文件
+`基本思路:` 基本思路同上，需要拼一个base64的字符串,不同的地方就是需要把data设置成text/plain属性
+
+
+#### 举例
+```js
+var fileName = 'test.txt';
+var content = 'test\n'; //支持换行符，制表符等转移字符
+exportToText('测试', tableHtml);
+```
+
+## Js实现下载文件
+`基本思路:` 利用a标签的download属性
