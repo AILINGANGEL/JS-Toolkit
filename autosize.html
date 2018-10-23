@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>autoresizing textarea</title>
+    <style type="text/css">
+    textarea {
+        border: 0 none white;
+        overflow: hidden;
+        padding: 0;
+        outline: none;
+        background-color: #D0D0D0;
+        resize: none;
+    }
+    </style>
+    <script type="text/javascript">
+    var observe;
+    if (window.attachEvent) {
+        observe = function(element, event, handler) {
+            element.attachEvent('on' + event, handler);
+        };
+    } else {
+        observe = function(element, event, handler) {
+            element.addEventListener(event, handler, false);
+        };
+    }
+    function init() {
+        var text = document.getElementById('text');
+        function resize() {
+            // 删除文本的时候使用
+            text.style.height = 'auto'; // 适应可见文本以及初始的高度, 或者很小的一个具体像素的值,比如5px，这个时候不能容纳一行,因此scrollHeight又能取到正确的值
+            // 当文本框的区域不如能容纳下内容的时候scrollHeight是容纳文本需要的最小高度,如果文本框的高度能容纳内容的高度，则scrollHeight就是文本框的高度不会变小
+            text.style.height = text.scrollHeight + 'px';
+        }
+        /* 0-timeout to get the already changed text */
+        // 文字变化了再计算
+        function delayedResize() {
+            // 确保文字变了再计算;
+            window.setTimeout(resize, 0);
+        }
+        observe(text, 'change', resize);
+        observe(text, 'cut',     delayedResize);
+        observe(text, 'paste',   delayedResize);
+        observe(text, 'drop',    delayedResize); 
+        observe(text, 'keydown', delayedResize);
+        text.focus();
+        text.select();
+        // resize();
+    }
+    </script>
+</head>
+
+<body onload="init();">
+    <textarea  id="text"></textarea>
+</body>
+
+</html>
